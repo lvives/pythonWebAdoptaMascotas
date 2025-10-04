@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="card shadow-sm border-0">
+	<div class="card-body">
+    	<h3 class="mb-4 text-primary">
+    		<i class="fa-solid fa-plus me-2"></i>Crear Nuevo Tipo de Mascota
+    	</h3>
+
+    	<form method="POST" action="{% url 'app1:registrarTipo' %}">
+        	{% csrf_token %}
+			<!--PREGUNTA 2 - CREACION DEL FORMULARIO PARA CREAR TIPOS DE MASCOTAS-->
+			<div class="mb-3">
+      			<label for="nombre" class="form-label">Nombre del Tipo</label>
+      			<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej. Perro, Gato" required>
+    		</div>
+
+    		<div class="mb-3">
+      			<label for="descripcion" class="form-label">Descripción</label>
+      			<textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Describe brevemente este tipo de mascota"></textarea>
+    		</div>
+
+    		<button type="submit" class="btn btn-primary">
+      			<i class="fa-solid fa-save me-1"></i> Registrar Tipo
+    		</button>
+			<!--FIN DE CODIGO - OBSERVAR QUE EL ATRIBUTO ACTION DEL FORMULARIO YA SE ENCUENTRA CONFIGURADO-->
+      	</form>
+		<h3 class="mt-4">Tipos Existentes</h3>
+  		<ul class="list-group">
+    		{% for tipo in tipos %}
+      		<li class="list-group-item">{{ tipo.nombre }} — <small>{{ tipo.descripcion }}</small></li>
+    		{% empty %}
+      		<li class="list-group-item text-muted">No hay tipos registrados aún.</li>
+    		{% endfor %}
+  		</ul>
+
+
+    </div>
+</div>
+{% endblock %}
